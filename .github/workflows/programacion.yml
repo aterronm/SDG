@@ -33,17 +33,16 @@ jobs:
         bundle config set --local without 'development test'
         bundle install
 
-    - name: 🚀 Ejecutar Scraper Tesla Diario
+    - - name: 🚀 5. EJECUTAR ROBOT
       env:
-        AI_DATABASE_URL: ${{ secrets.AI_DATABASE_URL }}
+        # ✅ BIEN: Le damos a Rails lo que quiere, usando tu secreto
+        DATABASE_URL: ${{ secrets.AI_DATABASE_URL }}
+        
+        # El resto déjalo igual...
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         RAILS_ENV: production
-        
-        # DEFINIMOS LA MARCA Y EL MODO SERVIDOR
-        BRAND: "Tesla"
-        CI: "true" 
-
-
+        BRAND: "Tesla" # O la que quieras
+        CI: "true"
         SECRET_KEY_BASE: "una_clave_super_secreta_y_larga_123456789_inventada_por_mi"
       run: |
         bundle exec rake import:autodata
