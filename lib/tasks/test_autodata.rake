@@ -123,7 +123,9 @@ unless Vehicle.column_names.include?("modification_engine")
         puts "🚀 INICIANDO V13.1 - #{@brand.name.upcase} (ID: #{@brand.id})"
         
         puts "📡 Fase 1: Análisis de estructura..."
-        scout = create_driver(headless: false)
+        #scout = create_driver(headless: false)
+        # Si estamos en el servidor (CI=true), usa headless. Si es tu PC, abre ventana.
+scout = create_driver(headless: ENV['CI'] == 'true')
         
         begin
           scout.get(@start_url)
@@ -182,8 +184,7 @@ unless Vehicle.column_names.include?("modification_engine")
       private
   
       def run_worker(id)
-        driver = create_driver(headless: false)
-        while !@queue.empty?
+        driver = create_driver(headless: ENV['CI'] == 'true')        while !@queue.empty?
           begin
             url = @queue.pop(true)
             process_vehicle(driver, url)

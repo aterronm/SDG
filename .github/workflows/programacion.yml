@@ -1,0 +1,46 @@
+name: Ejecución Diaria Automática
+
+on:
+  # 1. Programación (Schedule)
+  schedule:
+    # 22:00 UTC = 23:00 en España (Invierno) / 00:00 en España (Verano)
+    - cron: '0 22 * * *'
+  
+  # 2. Botón manual (Para que puedas probarlo YA si quieres)
+  workflow_dispatch:
+
+jobs:
+  trabajo-diario:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: 📥 Descargar código
+      uses: actions/checkout@v4
+
+    - name: 💎 Instalar Ruby
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: '3.2'
+        bundler-cache: true
+
+    # Necesitamos instalar Chrome para Selenium (aunque sea headless)
+    - name: 🌐 Instalar Chrome (Necesario para Selenium)
+      uses: browser-actions/setup-chrome@v1
+
+    - name: 📦 Instalar dependencias
+      run: |
+        bundle config set --local deployment 'true'
+        bundle config set --local without 'development test'
+        bundle install
+
+    - name: 🚀 Ejecutar Scraper BMW Diario
+      env:
+        AI_DATABASE_URL: ${{ secrets.AI_DATABASE_URL }}
+        GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        RAILS_ENV: production
+        
+        # DEFINIMOS LA MARCA Y EL MODO SERVIDOR
+        BRAND: "BMW"
+        CI: "true" 
+      run: |
+        bundle exec rake import:autodata
