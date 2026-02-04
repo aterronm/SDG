@@ -33,7 +33,7 @@ jobs:
         bundle config set --local without 'development test'
         bundle install
 
-    - - name: 🚀 5. EJECUTAR ROBOT
+    - name: 🚀 5. EJECUTAR ROBOT
       env:
         # ✅ BIEN: Le damos a Rails lo que quiere, usando tu secreto
         DATABASE_URL: ${{ secrets.AI_DATABASE_URL }}
