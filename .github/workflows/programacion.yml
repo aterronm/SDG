@@ -42,5 +42,8 @@ jobs:
         # DEFINIMOS LA MARCA Y EL MODO SERVIDOR
         BRAND: "Tesla"
         CI: "true" 
+
+
+        SECRET_KEY_BASE: "una_clave_super_secreta_y_larga_123456789_inventada_por_mi"
       run: |
         bundle exec rake import:autodata
