@@ -59,7 +59,7 @@ namespace :import do
   class AutoDataScraper
     BASE_URL = "https://www.auto-data.net"
     ALL_BRANDS_URL = "https://www.auto-data.net/en/allbrands"
-    WORKERS_COUNT = 4
+    WORKERS_COUNT = 1
 
     def initialize(brand_name, start_url, brand_id)
       @brand_name = brand_name
