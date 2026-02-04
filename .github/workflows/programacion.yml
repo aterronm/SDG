@@ -33,14 +33,14 @@ jobs:
         bundle config set --local without 'development test'
         bundle install
 
-    - name: 🚀 Ejecutar Scraper BMW Diario
+    - name: 🚀 Ejecutar Scraper Tesla Diario
       env:
         AI_DATABASE_URL: ${{ secrets.AI_DATABASE_URL }}
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         RAILS_ENV: production
         
         # DEFINIMOS LA MARCA Y EL MODO SERVIDOR
-        BRAND: "BMW"
+        BRAND: "Tesla"
         CI: "true" 
       run: |
         bundle exec rake import:autodata
