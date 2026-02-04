@@ -36,7 +36,7 @@ jobs:
     - name: 🚀 5. EJECUTAR ROBOT
       env:
         # ✅ BIEN: Le damos a Rails lo que quiere, usando tu secreto
-        DATABASE_URL: ${{ secrets.AI_DATABASE_URL }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
         
         # El resto déjalo igual...
         GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
