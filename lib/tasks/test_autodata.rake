@@ -184,7 +184,8 @@ scout = create_driver(headless: ENV['CI'] == 'true')
       private
   
       def run_worker(id)
-        driver = create_driver(headless: ENV['CI'] == 'true')        while !@queue.empty?
+        driver = create_driver(headless: ENV['CI'] == 'true')
+        while !@queue.empty?
           begin
             url = @queue.pop(true)
             process_vehicle(driver, url)
