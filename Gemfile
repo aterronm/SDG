@@ -71,6 +71,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "parallel", "~> 1.27"
+gem "parallel", "~> 1.28"
 
 gem 'dotenv-rails', groups: [:development, :test]
